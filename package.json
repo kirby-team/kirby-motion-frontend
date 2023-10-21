@@ -7,7 +7,7 @@
     "services/*"
   ],
   "scripts": {
-    "build:all": "yarn turbo build --filter='@kirby-motion/*'"
+    "build:package": "yarn turbo build --filter='@kirby-motion/*'"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
