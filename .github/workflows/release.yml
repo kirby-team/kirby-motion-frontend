@@ -12,28 +12,24 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: Set Git User
+        run: |
+          git config --global user.name "kirby-CI"
+          git config --global user.email "kirby@kirby-motion-ci.com"
 
       - name: Setup Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
 
-      - name: Install Dependencies
-        run: yarn
+      - name: Install Unplugged Packages
+        run: yarn install --immutable --immutable-cache
 
       - name: Build
         run: yarn build:package
-        env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
-          NX_SKIP_NX_CACHE: ${{ secrets.NX_SKIP_NX_CACHE }}
           
-      - name: Release
-        id: changesets
+      - name: Create Release Pull Request
         uses: cometkim/yarn-changeset-action@v1
-        with:
-          autoPublish: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
