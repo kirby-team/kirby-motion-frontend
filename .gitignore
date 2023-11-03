@@ -1,5 +1,6 @@
 .envrc
-.env.dev
+.env.*
+env.*
 .turbo
 dist
 
@@ -16,4 +17,4 @@ node_modules
 
 
 # Webstorm IDE's
-./.idea
+./.idea/*
